@@ -7,10 +7,10 @@ const {verifyToken} = require('../middleware/authorization')
 
 
 
-router.get("/", verifyToken, talentController.getAllTalents);
-router.get("/:id", verifyToken, talentController.getByIdTalents);
-router.post("/create", verifyToken, storage.single("file"), talentController.createTalents);
-router.delete("/:id", verifyToken, talentController.deleteTalents);
+router.get("/",  talentController.getAllTalents);
+router.get("/:id", talentController.getByIdTalents);
+router.post("/create",  storage.single("file"), talentController.createTalents);
+router.delete("/:id",  talentController.deleteTalents);
 
 
 module.exports = router;

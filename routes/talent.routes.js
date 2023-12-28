@@ -9,6 +9,7 @@ const {verifyToken} = require('../middleware/authorization')
 
 router.get("/",  talentController.getAllTalents);
 router.get("/:id", talentController.getByIdTalents);
+router.patch("/:id", talentController.updateTalent);
 router.post("/create",  storage.single("file"), talentController.createTalents);
 router.delete("/:id",  talentController.deleteTalents);
 

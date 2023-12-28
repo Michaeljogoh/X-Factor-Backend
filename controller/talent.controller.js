@@ -5,15 +5,16 @@ const cloudinary = require('../lib/cloudinary');
 // Get all Talent
 const getAllTalents =  async (req , res) =>{
   // query with page limit 
-  const {page = 1, limit = 10} = req.query;
+//   const {page = 1, limit = 10} = req.query;
     
   const getAllTalents = await Talent.find()
-  .limit(limit * 1)
-  .skip((page - 1 ) * limit)
-  .exec();
+//   .limit(limit * 1)
+//   .skip((page - 1 ) * limit)
+//   .exec();
   //Get Total documents in blogPost collection
-const count = await Talent.countDocuments();
-res.json({getAllTalents, totalPages:Math.ceil(count / limit), currentPage: page})
+// const count = await Talent.countDocuments();
+// , totalPages:Math.ceil(count / limit), currentPage: page
+res.json({getAllTalents})
 }
 
 // Create Talents
@@ -33,8 +34,8 @@ const createTalents = async (req, res) =>{
          lastname: req.body.lastname,
          summarize: req.body.summarize,
          file: result.secure_url,
+         status:"pending"
        });
-       console.log(newUpload)
        return res.status(201).json({ message:"Talent Successfully Created" });
   }
   );
@@ -52,6 +53,19 @@ const getByIdTalents =  async (req , res) =>{
  return res.status(200).json({getTalentById})
 }
 
+// Update status
+const updateTalent = async (req , res) =>{
+  const getById = await Talent.findById(req.params.id);
+  if(!getById){
+    return res.status(400).send({message:'Talent Not Found'})
+ } 
+ const updateTalent = await Talent.findByIdAndUpdate(getById, {$set:req.body}, {new:true})
+ return res.status(200).json({updateTalent})
+
+}
+
+
+
 
 // Delete Talents
 const deleteTalents = async (req , res) =>{
@@ -64,5 +78,5 @@ if(!getById){
 }
 
 
-module.exports = {getAllTalents ,createTalents , getByIdTalents, deleteTalents }
+module.exports = {getAllTalents ,createTalents , getByIdTalents, updateTalent, deleteTalents }
 

@@ -13,7 +13,7 @@ errorHandler();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.use(cors({origin:"*", credentials:"" , methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']}))
+app.use(cors({origin:"*", credentials:true , methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']}))
 
 // connect mongodb
 connectMongodb();
@@ -25,8 +25,6 @@ app.get('/', (req , res)=>{
 
 app.use('/api/v1/user', userRoute);
 app.use('/api/v1/talent', talentsRoute);
-
-
 
 
 

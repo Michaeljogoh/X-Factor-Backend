@@ -42,7 +42,6 @@ const loginUser = async (req, res) => {
   const payload = { id: user._id };
   // user jwt
   const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "1h" });
-console.log(token)
   return res
     .status(200)
     .json({ message: "Login Successful", email: user.email, access: token });

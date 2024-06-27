@@ -5,6 +5,7 @@ const {connectMongodb} = require('./config/mongodb');
 const { errorHandler } = require('./middleware/errorHandler');
 const  userRoute  = require('./routes/users.route');
 const talentsRoute = require('./routes/talent.routes');
+const adminRoute = require('./routes/admin.route');
 const cors = require('cors');
 
 // error handler
@@ -25,6 +26,7 @@ app.get('/', (req , res)=>{
 
 app.use('/api/v1/user', userRoute);
 app.use('/api/v1/talent', talentsRoute);
+app.use('/api/v1/admin', adminRoute);
 
 
 
